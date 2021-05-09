@@ -13,6 +13,10 @@ class UserRepository {
     const user = await this.findOne({ localId: data.localId });
     return user || Model.create(data);
   }
+
+  static findById(id) {
+    return Model.findById(id);
+  }
 }
 
 module.exports = UserRepository;

@@ -9,6 +9,8 @@ const user = mongoose.Schema({
   photoUrl: String,
   providerId: String,
   localId: String,
+}, {
+  timestamps: true,
 });
 
 module.exports = mongoose.model('User', user);

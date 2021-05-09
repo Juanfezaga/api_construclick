@@ -18,7 +18,7 @@ const signIn = async (data) => {
 
 const getDataBasicUser = async (id) => {
   try {
-    const user = await Repository.findOne({ localId: id });
+    const user = await Repository.findById(id);
     return user;
   } catch (error) {
     throw new CustomError({
