@@ -7,6 +7,9 @@
     "test": "tests"
   },
   "scripts": {
+    "start": "node ./src/application/index.js",
+    "dev": "nodemon ./src/application/index.js",
+    "lint:fix": "eslint ./src --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

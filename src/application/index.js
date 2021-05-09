@@ -5,7 +5,7 @@ dotenv.config();
 
 const app = require('./startup/app');
 const { config } = require('./config');
-const { boot } = require('../../infrastructure/bootloaders');
+const { boot } = require('../infrastructure/bootloaders');
 
 const onListening = () => {
   console.log(`Server listening in ${config.PORT}`);

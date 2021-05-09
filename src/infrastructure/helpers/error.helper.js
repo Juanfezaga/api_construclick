@@ -1,6 +1,6 @@
 const { v4: uuid } = require('uuid');
 
-const { findOneInArray } = require('./arrays');
+const { findOneInArray } = require('./array.helper');
 const errorsList = require('../../application/constants/errors');
 const { dataStatus } = require('../../application/constants/api');
 
