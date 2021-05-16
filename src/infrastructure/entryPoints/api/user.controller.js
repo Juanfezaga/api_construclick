@@ -1,10 +1,19 @@
 const { success } = require('../../helpers/api.helper');
 
-const { signIn, getDataBasicUser } = require('../../../domain/useCases/user/user.service');
+const { signIn, getDataBasicUser, register } = require('../../../domain/useCases/user/user.service');
 
 const signInController = async (req, res, next) => {
   try {
     const response = await signIn(req.body);
+    success(res, response);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const registerController = async (req, res, next) => {
+  try {
+    const response = await register(req.body);
     success(res, response);
   } catch (error) {
     next(error);
@@ -22,5 +31,6 @@ const getDataBasicUserController = async (req, res, next) => {
 
 module.exports = {
   signInController,
+  registerController,
   getDataBasicUserController,
 };

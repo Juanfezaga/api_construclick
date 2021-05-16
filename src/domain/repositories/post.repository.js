@@ -1,19 +1,16 @@
+const Repository = require('./repository');
 const Model = require('../models/post.model');
 
-class PostRepository {
-  static find(filters) {
-    return Model.find(filters);
+class PostRepository extends Repository {
+  constructor() {
+    super(Model);
   }
 
-  static findComplex(notIds, type, limit) {
-    return Model.find({
+  findComplex(notIds, type, limit) {
+    return this.model.find({
       type,
       _id: { $nin: notIds },
     }).limit(limit).sort({ createdAt: 'desc' });
-  }
-
-  static async create(data) {
-    return Model.create(data);
   }
 }
 
