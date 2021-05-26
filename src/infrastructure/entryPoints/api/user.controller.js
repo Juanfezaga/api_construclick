@@ -1,5 +1,6 @@
 const { success } = require('../../helpers/api.helper');
 
+const { outputUserData } = require('../../../domain/serializers/user.serializer');
 const { signIn, getDataBasicUser, register } = require('../../../domain/useCases/user/user.service');
 
 const signInController = async (req, res, next) => {
@@ -14,7 +15,7 @@ const signInController = async (req, res, next) => {
 const registerController = async (req, res, next) => {
   try {
     const response = await register(req.body);
-    success(res, response);
+    success(res, outputUserData(response));
   } catch (error) {
     next(error);
   }
@@ -23,7 +24,7 @@ const registerController = async (req, res, next) => {
 const getDataBasicUserController = async (req, res, next) => {
   try {
     const response = await getDataBasicUser(req.params.id);
-    success(res, response);
+    success(res, outputUserData(response));
   } catch (error) {
     next(error);
   }

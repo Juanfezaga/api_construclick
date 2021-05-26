@@ -14,4 +14,4 @@ class PostRepository extends Repository {
   }
 }
 
-module.exports = PostRepository;
+module.exports = new PostRepository();

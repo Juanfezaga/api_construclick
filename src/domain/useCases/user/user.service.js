@@ -4,11 +4,14 @@ const {
 } = require('../../../infrastructure/helpers/error.helper');
 const Repository = require('../../repositories/user.repository');
 const { generateToken } = require('../../../infrastructure/helpers/jwt');
-const { compareHash } = require('../../../infrastructure/helpers/hash.helper.');
+const {
+  compareHash,
+  generateHash,
+} = require('../../../infrastructure/helpers/hash.helper.');
 
-const signIn = async ({ role, email, password }) => {
+const signIn = async ({ email, password }) => {
   try {
-    const user = await Repository.findOne({ email, role });
+    const user = await Repository.findOne({ email });
     if (!user || !compareHash(password, user.password)) {
       throw new CustomError({
         ...getErrorByName('USER:credentials'),
@@ -17,7 +20,6 @@ const signIn = async ({ role, email, password }) => {
 
     return generateToken({
       id: user.id,
-      role: user.role,
     });
   } catch (error) {
     if (!error.code) {
@@ -46,15 +48,20 @@ const register = async (data) => {
       if (user.email === data.email) {
         throw new CustomError({
           ...getErrorByName('USER:create:exist_email'),
+          error: new Error('Un usuario ya existe con este correo'),
         });
       }
       if (user.phone === data.phone) {
         throw new CustomError({
           ...getErrorByName('USER:create:exist_phone'),
+          error: new Error('Un usuario ya existe con este telefono'),
         });
       }
     }
-    return Repository.create(data);
+    return Repository.create({
+      ...data,
+      password: generateHash(data.password),
+    });
   } catch (error) {
     if (!error.code) {
       throw new CustomError({

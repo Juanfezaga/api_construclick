@@ -9,11 +9,15 @@ const user = mongoose.Schema({
     type: String,
     required: true,
   },
-  role: {
+  type: {
     type: String,
+    enum: ['persona', 'empresa'],
     required: true,
   },
-  lastName: String,
+  last_name: {
+    type: String,
+    required: false,
+  },
   password: {
     type: String,
     required: true,
@@ -22,18 +26,23 @@ const user = mongoose.Schema({
     type: String,
     required: true,
   },
-  photoUrl: String,
+  image_url: String,
   gender: {
     type: String,
+    enum: ['Masculino', 'Femenino'],
     required: false,
   },
-  birthday: {
+  birthdate: {
     type: Date,
     required: false,
   },
-  profession: {
-    type: String,
-    required: false,
+  profession_id: {
+    type: mongoose.Types.ObjectId,
+    ref: 'Profession',
+  },
+  city_id: {
+    type: mongoose.Types.ObjectId,
+    ref: 'City',
   },
   nit: {
     type: String,
@@ -46,6 +55,14 @@ const user = mongoose.Schema({
   phone_legal_representative: {
     type: String,
     required: false,
+  },
+  email_legal_representative: {
+    type: String,
+    required: false,
+  },
+  featured: {
+    type: Boolean,
+    default: false,
   },
 }, {
   timestamps: true,
