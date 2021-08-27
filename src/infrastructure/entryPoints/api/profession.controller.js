@@ -11,7 +11,7 @@ const createProfessionController = async (req, res, next) => {
   }
 };
 
-const getProfessionControllers = async () => {
+const getProfessionControllers = async (req, res, next) => {
   try {
     const response = await getProfessions();
     success(res, response);
