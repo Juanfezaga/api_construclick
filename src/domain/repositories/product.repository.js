@@ -1,7 +1,7 @@
 const Repository = require('./repository');
-const Model = require('../models/post.model');
+const Model = require('../models/product.model');
 
-class PostRepository extends Repository {
+class ProductRepository extends Repository {
   constructor() {
     super(Model);
   }
@@ -14,4 +14,4 @@ class PostRepository extends Repository {
   }
 }
 
-module.exports = new PostRepository();
+module.exports = new ProductRepository();
