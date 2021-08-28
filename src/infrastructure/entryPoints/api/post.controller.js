@@ -13,8 +13,8 @@ const createPostController = async (req, res, next) => {
 
 const getPostsControllers = async (req, res, next) => {
   try {
-    const { notIds, type } = req.query;
-    const response = await getPosts({ notIds, type });
+    const { notIds, filters } = req.query;
+    const response = await getPosts({ notIds, filters });
     success(res, response);
   } catch (error) {
     next(error);

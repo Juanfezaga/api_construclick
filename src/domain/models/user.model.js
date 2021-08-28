@@ -48,6 +48,26 @@ const user = mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  name_commercial: {
+    type: String,
+    required: false,
+  },
+  nit: {
+    type: String,
+    required: false,
+  },
+  name_legal_representative: {
+    type: String,
+    required: false,
+  },
+  phone_legal_representative: {
+    type: String,
+    required: false,
+  },
+  email_legal_representative: {
+    type: String,
+    required: false,
+  },
 }, {
   timestamps: true,
 });

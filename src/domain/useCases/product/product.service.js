@@ -2,12 +2,12 @@ const {
   CustomError,
   getErrorByName,
 } = require('../../../infrastructure/helpers/error.helper');
-const Repository = require('../../repositories/post.repository');
+const Repository = require('../../repositories/product.repository');
 
-const createPost = async (data) => {
+const createProduct = async (data) => {
   try {
-    const post = await Repository.create(data);
-    return post;
+    const product = await Repository.create(data);
+    return product;
   } catch (error) {
     throw new CustomError({
       ...getErrorByName('POST:internal'),
@@ -16,10 +16,10 @@ const createPost = async (data) => {
   }
 };
 
-const getPosts = async ({ notIds, filters }) => {
+const getProducts = async ({ notIds, filters }) => {
   try {
-    const posts = await Repository.findComplex(notIds, filters, 5);
-    return posts;
+    const products = await Repository.findComplex(notIds, filters, 10);
+    return products;
   } catch (error) {
     throw new CustomError({
       ...getErrorByName('POST:internal'),
@@ -29,6 +29,6 @@ const getPosts = async ({ notIds, filters }) => {
 };
 
 module.exports = {
-  getPosts,
-  createPost,
+  getProducts,
+  createProduct,
 };
