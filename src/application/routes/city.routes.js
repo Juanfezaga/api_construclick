@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 const {
   createCityController,
-  getCityControllers
+  getCityControllers,
 } = require('../../infrastructure/entryPoints/api/city.controller');
 
 router.post('/', createCityController);

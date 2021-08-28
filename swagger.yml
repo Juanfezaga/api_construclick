@@ -1,0 +1,129 @@
+openapi: 3.0.0
+info:
+  title: Construclick API
+  description: Api construclick doc
+  version: 0.0.1
+servers:
+  - url: http://localhost:3001
+    description: Local server
+  - url: https://api-dev.construclick.com
+    description: Server environment development
+  - url: https://api-prod.construclick.com
+    description: Server environment development
+paths:
+  /:
+    get:
+      tags:
+        - Health
+      summary: Health Check
+      responses:
+        '200':
+          description: Health Ok
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  health:
+                    type: string
+                    description: Name project and ENV.
+                  date:
+                    type: string
+                    description: Date of server machine
+  /city:
+    get:
+      tags:
+        - City
+      summary: Get all cities
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/City'
+    post:
+      tags:
+        - City
+      summary: Create new City
+      requestBody:
+        description: Datos de la nueva ciudad
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        '200':
+          description: Created city
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/City'
+  /profession:
+    get:
+      tags:
+        - Profession
+      summary: Get all professions
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Profession'
+    post:
+      tags:
+        - Profession
+      summary: Create new Profession
+      requestBody:
+        description: Datos de la nueva profesion
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+      responses:
+        '200':
+          description: Created profession
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Profession'
+components:
+  schemas:
+    City:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+    Profession:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+tags:
+  - name: City
+    description: Ciudades disponibles.
+  - name: Profession
+    description: Profesiones disponibles.
+  - name: Health
+    description: Health check apis
+  - name: User
+    description: Users account
+  - name: Auth
+    description: Endpoints para autenticacion

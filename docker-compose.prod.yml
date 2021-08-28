@@ -1,0 +1,20 @@
+version: '3.2'
+services:
+  node-api:
+    build:
+      context: .
+      dockerfile: prod.Dockerfile
+    volumes:
+      - .:/usr/app
+    ports:
+      - "3001:3001"
+    environment:
+      NODE_ENV: production
+      DEBUG: nodejs-docker-express:*
+      PORT: 3001
+      MONGO_URL: "mongodb+srv://us_construc:4QfjzRT07vZnHvMc@cluster0.3xdlf.mongodb.net/construclick_app?retryWrites=true&w=majority"
+      AWS_REGION: "us-east-2"
+      AWS_BUCKET: "construclick-app-files"
+      AWS_KEY_ID: "AKIASPUOEDAY5LMJPT76"
+      AWS_KEY_SECRET: "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"
+      JWT_KEY_PRIVATE: "construclick4QfjzRT07vZnHvMcpqpIiMid5EyBWyMVOfyu04BzC9TGSI"
