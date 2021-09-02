@@ -1,12 +1,15 @@
-FROM node:14-alpine as base
+FROM node:14-alpine
 
-RUN mkdir -p /usr/app
-WORKDIR /usr/app
+# Create app directory
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
-COPY package*.json ./
+# Install app dependencies
+COPY package.json /usr/src/app/
 RUN npm install
 
-COPY . ./
+# Bundle app source
+COPY . /usr/src/app
 
 EXPOSE 3001
-CMD npm run dev
+CMD [ "npm", "run", "start" ]
