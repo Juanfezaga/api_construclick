@@ -1,5 +1,5 @@
 {
-  "name": "120-headless-cms",
+  "name": "construclick_api",
   "version": "1.0.0",
   "description": "Headless CMS",
   "main": "src/application/index.js",
