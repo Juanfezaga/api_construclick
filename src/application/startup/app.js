@@ -5,7 +5,7 @@ const express = require('express');
 const compression = require('compression');
 
 const routes = require('../routes');
-const errorMiddleware = require('../middlewares/validation');
+const errorMiddleware = require('../middlewares/error');
 
 const app = express();
 
