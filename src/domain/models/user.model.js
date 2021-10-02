@@ -48,10 +48,6 @@ const user = mongoose.Schema({
     type: Boolean,
     default: false,
   },
-  name_commercial: {
-    type: String,
-    required: false,
-  },
   nit: {
     type: String,
     required: false,

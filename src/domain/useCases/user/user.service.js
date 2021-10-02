@@ -20,6 +20,7 @@ const signIn = async ({ email, password }) => {
 
     return generateToken({
       id: user.id,
+      role: user.type
     });
   } catch (error) {
     if (!error.code) {
