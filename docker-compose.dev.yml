@@ -10,6 +10,7 @@ services:
       - ./src:/usr/src/app/src
     environment:
       NODE_ENV: development
+      ELASTIC_SEARCH_URL: http://localhost:9200
       DEBUG: nodejs-docker-express:*
       PORT: 3001
       MONGO_URL: mongodb+srv://us_construc:4QfjzRT07vZnHvMc@cluster0.3xdlf.mongodb.net/construclick_app?retryWrites=true&w=majority

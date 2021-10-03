@@ -9,6 +9,7 @@ const config = {
     keyId: process.env.AWS_KEY_ID,
     keySecret: process.env.AWS_KEY_SECRET,
   },
+  ESEARCH_URL: process.env.ELASTIC_SEARCH_URL,
 };
 
 module.exports = {
