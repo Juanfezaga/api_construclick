@@ -11,7 +11,7 @@ const createCityController = async (req, res, next) => {
   }
 };
 
-const getCityControllers = async () => {
+const getCityControllers = async (req, res, next) => {
   try {
     const response = await getCitys();
     success(res, response);

@@ -1,5 +1,5 @@
 {
-  "name": "120-headless-cms",
+  "name": "construclick_api",
   "version": "1.0.0",
   "description": "Headless CMS",
   "main": "src/application/index.js",
@@ -28,6 +28,7 @@
   "homepage": "https://github.com/yosoyjp/120-headless-cms#readme",
   "dependencies": {
     "aws-sdk": "^2.903.0",
+    "axios": "^0.22.0",
     "bcryptjs": "^2.4.3",
     "compression": "^1.7.4",
     "cors": "^2.8.5",

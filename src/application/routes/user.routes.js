@@ -6,7 +6,7 @@ const {
   getDataBasicUserController,
 } = require('../../infrastructure/entryPoints/api/user.controller');
 
-router.post('/', signInController);
+router.post('/auth', signInController);
 router.post('/register', registerController);
 
 router.get('/:id', getDataBasicUserController);
