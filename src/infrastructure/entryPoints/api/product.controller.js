@@ -21,7 +21,40 @@ const getProductsControllers = async (req, res, next) => {
   }
 };
 
+const getProductsByCompanyControllers = async (req, res, next) => {
+  try {
+    const { notIds, filters } = req.query;
+    const { userId } = req.params;
+    const response = await getProducts({
+      notIds,
+      filters: {
+        ...filters,
+        userId,
+      },
+    });
+    success(res, response);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getProductsWithSearchControllers = async (req, res, next) => {
+  try {
+    const { notIds, filters, q } = req.query;
+    const response = await getProducts({
+      notIds,
+      filters,
+      search: q,
+    });
+    success(res, response);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   getProductsControllers,
   createProductController,
+  getProductsByCompanyControllers,
+  getProductsWithSearchControllers,
 };

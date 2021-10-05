@@ -16,9 +16,9 @@ const createProduct = async (data) => {
   }
 };
 
-const getProducts = async ({ notIds, filters }) => {
+const getProducts = async ({ notIds, filters, search }) => {
   try {
-    const products = await Repository.findComplex(notIds, filters, 10);
+    const products = await Repository.findComplex(notIds, filters, 10, search);
     return products;
   } catch (error) {
     throw new CustomError({

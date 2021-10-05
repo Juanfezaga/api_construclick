@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const { statesProduct } = require('../../application/constants/products');
+
 const product = mongoose.Schema({
   userId: {
     type: mongoose.Types.ObjectId,
@@ -13,6 +15,11 @@ const product = mongoose.Schema({
   categoryId: {
     type: mongoose.Types.ObjectId,
     ref: 'Category',
+  },
+  state: {
+    type: String,
+    enum: statesProduct,
+    default: statesProduct[0],
   },
 }, {
   timestamps: true,
