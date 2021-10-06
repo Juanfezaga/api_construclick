@@ -6,6 +6,8 @@ services:
       dockerfile: prod.Dockerfile
     ports:
       - "3001:3001"
+    volumes:
+      - ./src:/usr/src/app/src
     environment:
       NODE_ENV: production
       DEBUG: nodejs-docker-express:*
