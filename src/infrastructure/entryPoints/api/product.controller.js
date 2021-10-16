@@ -1,6 +1,9 @@
 const { success } = require('../../helpers/api.helper');
 
-const { createProduct, getProducts } = require('../../../domain/useCases/product/product.service');
+const {
+  getProductById,
+  createProduct, getProducts, updateProduct, deleteProduct,
+} = require('../../../domain/useCases/product/product.service');
 
 const createProductController = async (req, res, next) => {
   try {
@@ -15,6 +18,16 @@ const getProductsControllers = async (req, res, next) => {
   try {
     const { notIds, filters } = req.query;
     const response = await getProducts({ notIds, filters });
+    success(res, response);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getProductByIdControllers = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const response = await getProductById(id);
     success(res, response);
   } catch (error) {
     next(error);
@@ -52,9 +65,52 @@ const getProductsWithSearchControllers = async (req, res, next) => {
   }
 };
 
+const getProductsWithSearchWithUserControllers = async (req, res, next) => {
+  try {
+    const { notIds, filters, q } = req.query;
+    const { userId } = req.params;
+    const response = await getProducts({
+      notIds,
+      filters: {
+        ...filters,
+        userId,
+      },
+      search: q,
+    });
+    success(res, response);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const updateProductController = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { data } = req.body;
+    const response = await updateProduct({ id, newData: data });
+    success(res, response);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const deleteProductController = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const response = await deleteProduct(id);
+    success(res, response);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   getProductsControllers,
+  updateProductController,
   createProductController,
+  deleteProductController,
+  getProductByIdControllers,
   getProductsByCompanyControllers,
   getProductsWithSearchControllers,
+  getProductsWithSearchWithUserControllers,
 };
