@@ -11,7 +11,7 @@ const user = mongoose.Schema({
   },
   type: {
     type: String,
-    enum: ['persona', 'empresa'],
+    enum: ['persona', 'empresa', 'admin'],
     required: true,
   },
   last_name: {
