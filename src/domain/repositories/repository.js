@@ -19,6 +19,14 @@ class Repository {
     return this.model.findById(id);
   }
 
+  async findOrCreate(data, conditions) {
+    let doc = await this.findOne(conditions || data);
+    if (!doc) {
+      doc = await this.create(data);
+    }
+    return doc;
+  }
+
   async update(id, data) {
     const doc = await this.findById(id);
     if (doc) {
@@ -31,6 +39,10 @@ class Repository {
 
   delete(id) {
     return this.model.deleteOne({ _id: id });
+  }
+
+  deleteMany(conditions) {
+    return this.model.deleteMany(conditions);
   }
 }
 

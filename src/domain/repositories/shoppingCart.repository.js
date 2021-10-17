@@ -1,0 +1,11 @@
+/* eslint-disable no-console */
+const Repository = require('./repository');
+const Model = require('../models/shoppingCart.model');
+
+class ShoppingCartRepository extends Repository {
+  constructor() {
+    super(Model);
+  }
+}
+
+module.exports = new ShoppingCartRepository();
