@@ -24,7 +24,6 @@ const registerController = async (req, res, next) => {
 const getDataBasicUserController = async (req, res, next) => {
   try {
     const response = await getDataBasicUser(req.params.id);
-    console.log("🚀 ~ file: user.controller.js ~ line 27 ~ getDataBasicUserController ~ response", response);
     success(res, outputUserData(response));
   } catch (error) {
     next(error);
