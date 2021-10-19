@@ -5,8 +5,8 @@ const outputUserData = (data) => ({
   name: data.name,
   type: data.type,
   phone: data.phone,
+  cityId: data.cityId,
   email: data.email,
-  city_id: data.city_id,
   image_url: data.image_url,
   ...(data.type === 'persona' ? {
     last_name: data.last_name,

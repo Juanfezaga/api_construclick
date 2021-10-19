@@ -40,7 +40,7 @@ const user = mongoose.Schema({
     type: mongoose.Types.ObjectId,
     ref: 'Profession',
   },
-  city_id: {
+  cityId: {
     type: mongoose.Types.ObjectId,
     ref: 'City',
   },
