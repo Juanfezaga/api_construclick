@@ -7,6 +7,7 @@ const image = require('./image.routes');
 const product = require('./products.routes');
 const category = require('./category.routes');
 const marketplace = require('./marketplace.routes');
+const shoppingCart = require('./shoppingCart.routes');
 
 module.exports = [
   ['/', health],
@@ -18,4 +19,5 @@ module.exports = [
   ['/image', image],
   ['/category', category],
   ['/marketplace', marketplace],
+  ['/shopping-cart', shoppingCart],
 ];

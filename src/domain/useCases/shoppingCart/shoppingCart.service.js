@@ -8,11 +8,28 @@ const { statesShoppingCart } = require('../../../application/constants/shoppingC
 
 const initShoppingCart = async (userId) => {
   try {
-    const shoppingCart = await Repository.findOrCreate({
+    let items = [];
+    let shoppingCart = await Repository.findOne({
       userId,
       state: statesShoppingCart[0],
     });
-    return shoppingCart;
+    if (shoppingCart) {
+      console.log(shoppingCart.id);
+      items = await RepositoryItem.find({
+        shoppingCartId: shoppingCart.id,
+      });
+    } else {
+      shoppingCart = await Repository.create({
+        userId,
+        state: statesShoppingCart[0],
+      });
+    }
+    return {
+      ...shoppingCart._doc,
+      items,
+      total: items.map(({ unitPrice, quantity }) => unitPrice * quantity)
+        .reduce((prev, current) => current + prev),
+    };
   } catch (error) {
     throw new CustomError({
       ...getErrorByName('SHOPPING_CART:internal'),

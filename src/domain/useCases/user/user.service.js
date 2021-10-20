@@ -1,13 +1,13 @@
 const {
+  compareHash,
+  generateHash,
+} = require('../../../infrastructure/helpers/hash.helper.');
+const {
   CustomError,
   getErrorByName,
 } = require('../../../infrastructure/helpers/error.helper');
 const Repository = require('../../repositories/user.repository');
 const { generateToken } = require('../../../infrastructure/helpers/jwt');
-const {
-  compareHash,
-  generateHash,
-} = require('../../../infrastructure/helpers/hash.helper.');
 
 const signIn = async ({ email, password }) => {
   try {
@@ -20,7 +20,7 @@ const signIn = async ({ email, password }) => {
 
     return generateToken({
       id: user.id,
-      role: user.type
+      role: user.type,
     });
   } catch (error) {
     if (!error.code) {
