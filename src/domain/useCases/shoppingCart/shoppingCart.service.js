@@ -15,9 +15,7 @@ const initShoppingCart = async (userId) => {
     });
     if (shoppingCart) {
       console.log(shoppingCart.id);
-      items = await RepositoryItem.find({
-        shoppingCartId: shoppingCart.id,
-      });
+      items = await RepositoryItem.aggregateFindItems(shoppingCart.id);
     } else {
       shoppingCart = await Repository.create({
         userId,
@@ -27,10 +25,11 @@ const initShoppingCart = async (userId) => {
     return {
       ...shoppingCart._doc,
       items,
-      total: items.map(({ unitPrice, quantity }) => unitPrice * quantity)
+      total: items.length > 0 && items.map(({ unitPrice, quantity }) => unitPrice * quantity)
         .reduce((prev, current) => current + prev),
     };
   } catch (error) {
+    console.log(error);
     throw new CustomError({
       ...getErrorByName('SHOPPING_CART:internal'),
       error,
