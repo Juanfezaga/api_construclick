@@ -7,7 +7,7 @@ const post = mongoose.Schema({
   },
   type: String,
   title: String,
-  image_url: String,
+  imagesUrl: String,
   attributes: [
     {
       name: String,
