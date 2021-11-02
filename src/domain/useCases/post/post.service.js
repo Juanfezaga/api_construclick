@@ -9,6 +9,7 @@ const createPost = async (data) => {
     const post = await Repository.create(data);
     return post;
   } catch (error) {
+    console.log(error);
     throw new CustomError({
       ...getErrorByName('POST:internal'),
       error,

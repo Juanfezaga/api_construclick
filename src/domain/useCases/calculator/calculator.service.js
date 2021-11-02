@@ -1,3 +1,5 @@
+const Equations = require('equations').default;
+
 const {
   CustomError,
   getErrorByName,
@@ -16,10 +18,24 @@ const createCalculator = async (data) => {
   }
 };
 
-const calculate = () => {
+const calculate = async (nameCalculator, values) => {
   try {
-    console.log("Here");
+    const calculator = await Repository.findOne({
+      name: nameCalculator,
+    });
+    return calculator.equations.map(({ name, equation }) => {
+      const keys = Object.keys(values);
+      let eqEnd = equation;
+      for (let index = 0; index < keys.length; index += 1) {
+        eqEnd = eqEnd.replace(`{${keys[index]}}`, values[keys[index]]);
+      }
+      return {
+        name,
+        result: Equations.solve(eqEnd),
+      };
+    });
   } catch (error) {
+    console.error(error);
     throw new CustomError({
       ...getErrorByName('category:internal'),
       error,
@@ -28,5 +44,6 @@ const calculate = () => {
 };
 
 module.exports = {
+  calculate,
   createCalculator,
 };
