@@ -21,6 +21,7 @@ const getPostsAggregate = async (type) => {
         imagesUrl: '$imagesUrl',
         userId: '$userId',
         title: '$title',
+        createdAt: '$createdAt',
         type: '$type',
         attributes: '$attributes',
         user: {
@@ -39,6 +40,12 @@ const getPostsAggregate = async (type) => {
         userName: '$user.name',
         userLastname: '$user.last_name',
         userImage: '$user.image_url',
+        createdAt: '$createdAt',
+      },
+    },
+    {
+      $sort: {
+        createdAt: -1,
       },
     },
   ]);
