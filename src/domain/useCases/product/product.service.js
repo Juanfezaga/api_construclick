@@ -2,6 +2,7 @@ const {
   CustomError,
   getErrorByName,
 } = require('../../../infrastructure/helpers/error.helper');
+const aggregates = require('../../aggregations/aggregates');
 const Repository = require('../../repositories/product.repository');
 
 const getProductById = async (id) => {
@@ -40,6 +41,18 @@ const getProducts = async ({ notIds, filters, search }) => {
   }
 };
 
+const getProductsByCategory = async (categoryId) => {
+  try {
+    const products = await aggregates.productsByCategory(categoryId);
+    return products;
+  } catch (error) {
+    throw new CustomError({
+      ...getErrorByName('POST:internal'),
+      error,
+    });
+  }
+};
+
 const updateProduct = async ({ id, newData }) => {
   try {
     await Repository.update(id, newData);
@@ -69,4 +82,5 @@ module.exports = {
   updateProduct,
   deleteProduct,
   getProductById,
+  getProductsByCategory,
 };

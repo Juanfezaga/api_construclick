@@ -8,11 +8,13 @@ const {
   getProductByIdControllers,
   getProductsByCompanyControllers,
   getProductsWithSearchControllers,
+  getProductsByCategoryControllers,
   getProductsWithSearchWithUserControllers,
 } = require('../../infrastructure/entryPoints/api/product.controller');
 
 router.post('/', createProductController);
 
+router.get('/category', getProductsByCategoryControllers);
 router.get('/search', getProductsWithSearchControllers);
 router.get('/id/:id', getProductByIdControllers);
 
