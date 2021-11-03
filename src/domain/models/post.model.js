@@ -8,12 +8,7 @@ const post = mongoose.Schema({
   type: String,
   title: String,
   imagesUrl: [String],
-  attributes: [
-    {
-      name: String,
-      value: String,
-    },
-  ],
+  attributes: Array,
 }, {
   timestamps: true,
 });

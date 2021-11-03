@@ -64,6 +64,9 @@ const user = mongoose.Schema({
     type: String,
     required: false,
   },
+  description: String,
+  facebook: String,
+  linkedin: String,
 }, {
   timestamps: true,
 });

@@ -2,6 +2,7 @@ const {
   CustomError,
   getErrorByName,
 } = require('../../../infrastructure/helpers/error.helper');
+const aggregations = require('../../aggregations/aggregates');
 const Repository = require('../../repositories/post.repository');
 
 const createPost = async (data) => {
@@ -17,9 +18,21 @@ const createPost = async (data) => {
   }
 };
 
-const getPosts = async ({ notIds, filters }) => {
+const getPosts = async (type) => {
   try {
-    const posts = await Repository.findComplex(notIds, filters, 5);
+    const posts = await aggregations.getPosts(type);
+    return posts;
+  } catch (error) {
+    throw new CustomError({
+      ...getErrorByName('POST:internal'),
+      error,
+    });
+  }
+};
+
+const getProjects = async (userId) => {
+  try {
+    const posts = await aggregations.getProjects(userId);
     return posts;
   } catch (error) {
     throw new CustomError({
@@ -32,4 +45,5 @@ const getPosts = async ({ notIds, filters }) => {
 module.exports = {
   getPosts,
   createPost,
+  getProjects,
 };
