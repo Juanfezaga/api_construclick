@@ -2,7 +2,7 @@ const { success } = require('../../helpers/api.helper');
 
 const {
   createPost, getPosts, getProjects, getPostById,
-} = require('../../../domain/useCases/post/post.service');
+} = require('../../../domain/useCases/post/');
 
 const createPostController = async (req, res, next) => {
   try {
