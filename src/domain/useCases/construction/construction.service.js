@@ -16,6 +16,18 @@ const createConstruction = async (data) => {
   }
 };
 
+const updateConstruction = async (id, newData) => {
+  try {
+    const construction = await Repository.update(id, newData);
+    return construction;
+  } catch (error) {
+    throw new CustomError({
+      ...getErrorByName('POST:internal'),
+      error,
+    });
+  }
+};
+
 const getConstructionById = async (id) => {
   try {
     const construction = await Repository.findById(id);
@@ -41,6 +53,7 @@ const getConstructionsByUser = async (userId) => {
 };
 
 module.exports = {
+  updateConstruction,
   createConstruction,
   getConstructionById,
   getConstructionsByUser,

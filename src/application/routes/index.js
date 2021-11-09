@@ -8,6 +8,7 @@ const category = require('./category.routes');
 const calculator = require('./calculator.routes');
 const profession = require('./profession.routes');
 const marketplace = require('./marketplace.routes');
+const construction = require('./construction.routes');
 const shoppingCart = require('./shoppingCart.routes');
 
 module.exports = [
@@ -22,4 +23,5 @@ module.exports = [
   ['/category', category],
   ['/marketplace', marketplace],
   ['/shopping-cart', shoppingCart],
+  ['/construction', construction],
 ];

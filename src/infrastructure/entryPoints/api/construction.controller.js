@@ -1,42 +1,46 @@
 const { success } = require('../../helpers/api.helper');
 
 const {
-  createPost, getPosts, getProjects, getPostById,
-} = require('../../../domain/useCases/post/');
+  createConstruction,
+  updateConstruction,
+  getConstructionById,
+  getConstructionsByUser,
+} = require('../../../domain/useCases/construction/construction.service');
 
-const createPostController = async (req, res, next) => {
+const createConstructionController = async (req, res, next) => {
   try {
-    const response = await createPost(req.body);
+    const response = await createConstruction(req.body);
     success(res, response);
   } catch (error) {
     next(error);
   }
 };
 
-const getPostsControllers = async (req, res, next) => {
+const updateConstructionController = async (req, res, next) => {
   try {
-    const { type } = req.query;
-    const response = await getPosts(type);
+    const { id } = req.params;
+    const { newData } = req.body;
+    const response = await updateConstruction(id, newData);
     success(res, response);
   } catch (error) {
     next(error);
   }
 };
 
-const getProjectsControllers = async (req, res, next) => {
+const getConstructionByUserIdControllers = async (req, res, next) => {
   try {
     const { userId } = req.query;
-    const response = await getProjects(userId);
+    const response = await getConstructionsByUser(userId);
     success(res, response);
   } catch (error) {
     next(error);
   }
 };
 
-const getPostByIdControllers = async (req, res, next) => {
+const getConstructionByIdControllers = async (req, res, next) => {
   try {
     const { id } = req.query;
-    const response = await getPostById(id);
+    const response = await getConstructionById(id);
     success(res, response);
   } catch (error) {
     next(error);
@@ -44,8 +48,8 @@ const getPostByIdControllers = async (req, res, next) => {
 };
 
 module.exports = {
-  getPostsControllers,
-  createPostController,
-  getProjectsControllers,
-  getPostByIdControllers,
+  createConstructionController,
+  updateConstructionController,
+  getConstructionByIdControllers,
+  getConstructionByUserIdControllers,
 };
