@@ -1,7 +1,7 @@
 const { success } = require('../../helpers/api.helper');
 
 const {
-  createPost, getPosts, getProjects, getPostById,
+  createPost, getPosts, getProjects, getPostById, getPostsByUserId,
 } = require('../../../domain/useCases/post/post.service');
 
 const createPostController = async (req, res, next) => {
@@ -17,6 +17,16 @@ const getPostsControllers = async (req, res, next) => {
   try {
     const { type } = req.query;
     const response = await getPosts(type);
+    success(res, response);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const getPostsByUserIdControllers = async (req, res, next) => {
+  try {
+    const { userId } = req.query;
+    const response = await getPostsByUserId(userId);
     success(res, response);
   } catch (error) {
     next(error);
@@ -48,4 +58,5 @@ module.exports = {
   createPostController,
   getProjectsControllers,
   getPostByIdControllers,
+  getPostsByUserIdControllers,
 };

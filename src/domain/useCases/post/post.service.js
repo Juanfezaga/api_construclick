@@ -29,6 +29,20 @@ const getPostById = async (id) => {
   }
 };
 
+const getPostsByUserId = async (userId) => {
+  try {
+    const posts = await Repository.find({
+      userId,
+    });
+    return posts;
+  } catch (error) {
+    throw new CustomError({
+      ...getErrorByName('POST:internal'),
+      error,
+    });
+  }
+};
+
 const getPosts = async (type) => {
   try {
     const posts = await aggregations.getPosts(type);
@@ -58,4 +72,5 @@ module.exports = {
   createPost,
   getProjects,
   getPostById,
+  getPostsByUserId,
 };
