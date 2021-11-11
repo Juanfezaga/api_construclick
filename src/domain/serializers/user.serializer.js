@@ -7,6 +7,9 @@ const outputUserData = (data) => ({
   phone: data.phone,
   cityId: data.cityId,
   email: data.email,
+  linkedin: data.linkedin,
+  facebook: data.facebook,
+  description: data.description,
   image_url: data.image_url,
   ...(data.type === 'persona' ? {
     last_name: data.last_name,
