@@ -29,7 +29,6 @@ class Repository {
 
   async update(id, data) {
     const doc = await this.findById(id);
-    console.log(doc);
     if (doc) {
       doc.overwrite({ ...doc, ...data });
       await doc.save();

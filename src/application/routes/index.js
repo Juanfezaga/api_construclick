@@ -1,6 +1,7 @@
 const user = require('./user.routes');
 const city = require('./city.routes');
 const post = require('./post.routes');
+const order = require('./order.routes');
 const image = require('./image.routes');
 const health = require('./health.routes');
 const product = require('./products.routes');
@@ -20,6 +21,7 @@ module.exports = [
   ['/city', city],
   ['/profession', profession],
   ['/image', image],
+  ['/order', order],
   ['/category', category],
   ['/marketplace', marketplace],
   ['/shopping-cart', shoppingCart],
