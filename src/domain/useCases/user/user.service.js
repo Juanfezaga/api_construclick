@@ -7,6 +7,7 @@ const {
   getErrorByName,
 } = require('../../../infrastructure/helpers/error.helper');
 const Repository = require('../../repositories/user.repository');
+const { usersByProfession } = require('../../aggregations/aggregates');
 const { generateToken } = require('../../../infrastructure/helpers/jwt');
 
 const signIn = async ({ email, password }) => {
@@ -86,8 +87,21 @@ const getDataBasicUser = async (id) => {
   }
 };
 
+const searchUserByProfession = async (search) => {
+  try {
+    const users = await usersByProfession(search);
+    return users;
+  } catch (error) {
+    throw new CustomError({
+      ...getErrorByName('USER:not_found'),
+      error,
+    });
+  }
+};
+
 module.exports = {
   signIn,
   register,
   getDataBasicUser,
+  searchUserByProfession,
 };
