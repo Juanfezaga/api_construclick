@@ -5,9 +5,9 @@ const {
   createProductController,
   updateProductController,
   deleteProductController,
+  searchProductsController,
   getProductByIdControllers,
   getProductsByCompanyControllers,
-  getProductsWithSearchControllers,
   getProductsByCategoryControllers,
   getProductsWithSearchWithUserControllers,
 } = require('../../infrastructure/entryPoints/api/product.controller');
@@ -15,7 +15,7 @@ const {
 router.post('/', createProductController);
 
 router.get('/category', getProductsByCategoryControllers);
-router.get('/search', getProductsWithSearchControllers);
+router.get('/search/:search', searchProductsController);
 router.get('/id/:id', getProductByIdControllers);
 
 router.get('/:userId/search', getProductsWithSearchWithUserControllers);

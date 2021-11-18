@@ -5,6 +5,18 @@ const {
 const aggregates = require('../../aggregations/aggregates');
 const Repository = require('../../repositories/product.repository');
 
+const searchProducts = async (search) => {
+  try {
+    const products = await aggregates.searchProducts(search);
+    return products;
+  } catch (error) {
+    throw new CustomError({
+      ...getErrorByName('POST:internal'),
+      error,
+    });
+  }
+};
+
 const getProductById = async (id) => {
   try {
     const product = await Repository.findById(id);
@@ -81,6 +93,7 @@ module.exports = {
   createProduct,
   updateProduct,
   deleteProduct,
+  searchProducts,
   getProductById,
   getProductsByCategory,
 };

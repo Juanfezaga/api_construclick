@@ -1,13 +1,22 @@
 const { success } = require('../../helpers/api.helper');
 
 const {
-  getProductById, getProductsByCategory,
+  getProductById, getProductsByCategory, searchProducts,
   createProduct, getProducts, updateProduct, deleteProduct,
 } = require('../../../domain/useCases/product/product.service');
 
 const createProductController = async (req, res, next) => {
   try {
     const response = await createProduct(req.body);
+    success(res, response);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const searchProductsController = async (req, res, next) => {
+  try {
+    const response = await searchProducts(req.params.search);
     success(res, response);
   } catch (error) {
     next(error);
@@ -119,6 +128,7 @@ module.exports = {
   updateProductController,
   createProductController,
   deleteProductController,
+  searchProductsController,
   getProductByIdControllers,
   getProductsByCompanyControllers,
   getProductsByCategoryControllers,
