@@ -1,6 +1,6 @@
 const { success } = require('../../helpers/api.helper');
 
-const { createOrder } = require('../../../domain/useCases/order/order.service');
+const { createOrder, getOrderById } = require('../../../domain/useCases/order/order.service');
 
 const createOrderController = async (req, res, next) => {
   try {
@@ -12,6 +12,17 @@ const createOrderController = async (req, res, next) => {
   }
 };
 
+const getOrderByIdController = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const response = await getOrderById(id);
+    success(res, response);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   createOrderController,
+  getOrderByIdController,
 };
