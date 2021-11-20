@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 const {
   CustomError,
   getErrorByName,
@@ -7,6 +8,7 @@ const { statesOrder } = require('../../../application/constants/order');
 const ShoppingCart = require('../../repositories/shoppingCart.repository');
 const ShoppingCartItems = require('../../repositories/shoppingCartItem.repository');
 const { statesShoppingCart } = require('../../../application/constants/shoppingCart');
+const { statesShoppingCartItems } = require('../../../application/constants/shoppingCart');
 
 const createOrder = async (shoppingCartId) => {
   try {
@@ -40,9 +42,19 @@ const setPaymentResponseSuccess = async (id, response) => {
   try {
     await Repository.update(id, {
       state: statesOrder[1],
-      responsePayment: response,
+      responsePayment: JSON.stringify(response),
+      paymentDate: new Date(),
     });
+    const order = await Repository.findById(id);
+    await ShoppingCart.update(order.shoppingCartId, { state: statesShoppingCart[1] });
+    const items = await ShoppingCartItems.find({ shoppingCartId: order.shoppingCartId });
+    await Promise.all(items.map((item) => ShoppingCartItems.update(item._id, {
+      ...item,
+      state: statesShoppingCartItems[1],
+    })));
+    return true;
   } catch (error) {
+    console.error(error);
     throw new CustomError({
       ...getErrorByName('PROFESSION:internal'),
       error,
@@ -54,9 +66,10 @@ const setPaymentResponseFail = async (id, response) => {
   try {
     await Repository.update(id, {
       state: statesOrder[2],
-      responsePayment: response,
+      responsePayment: JSON.stringify(response),
     });
   } catch (error) {
+    console.log(error);
     throw new CustomError({
       ...getErrorByName('PROFESSION:internal'),
       error,
@@ -76,9 +89,21 @@ const getOrderById = async (id) => {
   }
 };
 
+const setPaymentResponse = async (data) => {
+  const id = data.reference_sale;
+  const success = data.response_code_pol === 1;
+  if (success) {
+    await setPaymentResponseSuccess(id, data);
+  } else {
+    await setPaymentResponseFail(id, data);
+  }
+  return true;
+};
+
 module.exports = {
   createOrder,
   getOrderById,
+  setPaymentResponse,
   setPaymentResponseFail,
   setPaymentResponseSuccess,
 };

@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 class Repository {
   constructor(model) {
     this.model = model;
@@ -27,10 +28,13 @@ class Repository {
     return doc;
   }
 
-  async update(id, data) {
+  async update(id, data, withoutSync = false) {
+    if (withoutSync) {
+      return this.model.update(id, data);
+    }
     const doc = await this.findById(id);
     if (doc) {
-      doc.overwrite({ ...doc, ...data });
+      doc.overwrite({ ...doc._doc, ...data });
       await doc.save();
       return doc;
     }

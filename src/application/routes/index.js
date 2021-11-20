@@ -14,16 +14,16 @@ const shoppingCart = require('./shoppingCart.routes');
 
 module.exports = [
   ['/', health],
-  ['/calculator', calculator],
   ['/user', user],
-  ['/product', product],
   ['/post', post],
   ['/city', city],
-  ['/profession', profession],
   ['/image', image],
   ['/order', order],
+  ['/product', product],
   ['/category', category],
+  ['/calculator', calculator],
+  ['/profession', profession],
   ['/marketplace', marketplace],
-  ['/shopping-cart', shoppingCart],
   ['/construction', construction],
+  ['/shopping-cart', shoppingCart],
 ];

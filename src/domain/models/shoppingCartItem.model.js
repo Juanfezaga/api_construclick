@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { statesShoppingCartItems } = require('../../application/constants/shoppingCart');
 
 const shoppingCartItem = mongoose.Schema({
   shoppingCartId: {
@@ -11,6 +12,11 @@ const shoppingCartItem = mongoose.Schema({
   },
   unitPrice: Number,
   quantity: Number,
+  state: {
+    type: String,
+    enum: statesShoppingCartItems,
+    default: statesShoppingCartItems[0],
+  },
 }, {
   timestamps: true,
 });
